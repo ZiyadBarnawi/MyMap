@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+*{
+    font-family: "Nunito", sans-serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    color: #e9ecef;
+}
+html{
+    font-size: 62.5%;
+}
+
+
+main{
+    display: flex;
+    height: 99vh;
+    overflow: hidden;
+}
+img{
+    width: 5rem;
+}
+.vertical-container{
+    background-color: #343a40;
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    height: 99vh;
+    overflow-y: scroll;
+}
+.information{
+    /* padding: 2rem; */
+    height: 15%;
+    font-size: 1.6rem;
+    background-color: #343a40;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 2rem 2rem 2rem;
+    row-gap: 1rem;
+    align-items: center;
+    /* background-color: #495057; */
+    border-radius: 15;
+    
+}
+
+input,select{
+    width: 9rem;
+    border-radius: 1rem;
+    padding: 0.5rem;
+    background-color: #343a40;
+    color: whitesmoke;
+    /* border: none; */
+    
+}
+.btn{
+    margin-top: 2rem;
+}
+#map{
+    width: 70%;
+    height: 100%;
+}
+
+.hide{
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: 0.5s;
+}
+.unhide{
+    opacity: 1;
+    transform: translateY(0);
+    transition: 0.5s;
+}
+
+.expanded{
+    height: 13.3rem;
+    transition: 0.5s;
+}
+.unexpanded{
+
+    height: 10rem;
+    transition: 0.5s;
+}
+.btn{
+    border-radius: 1.5rem;
+    padding:0.5rem;
+    background-color: #343a40;
+    width: 10rem;
+    margin-left: 35%;
+    /* border: none; */
+}
+
+.running-popup{
+border-left: 0.5rem solid #63e6be;
+border-radius: 1.5rem;
+
+}
+.cycling-popup{
+    border-left: 0.5rem solid #f59f00;
+    border-radius: 1.5rem;
+}
+
+.elev-gain-div{
+    display: none;
+}
+
+.entry{
+    font-size: 2rem;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    cursor: pointer;
+}
+
+.running-entry{
+    border-left: 0.5rem solid #63e6be;
+    /* background-color: #495057; */
+    background-color: #212529;
+    border-top-right-radius: 1.5rem;
+    border-bottom-right-radius: 1.5rem;
+}
+.cycling-entry{
+    border-left: 0.5rem solid #f59f00;
+    background-color: #212529;
+    border-top-right-radius: 1.5rem;
+    border-bottom-right-radius: 1.5rem;
+}
+
+.icon{
+    width: 2.4rem;
+    overflow: visible;
+    transition: 0.5s;
+}
+
+.icon-upsideDown{
+    transform: rotate(180deg);
+    transition: 0.5s;
+}

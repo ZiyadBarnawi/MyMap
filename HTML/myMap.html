@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>myMap</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <link rel="stylesheet" href="../CSS/myMap.css">
+    <script defer src="../JS/myMap.js"></script>
+</head>
+<body>
+    
+    <main>
+
+
+        <div class="vertical-container">
+            <img src="img/icon.png" alt="">
+
+            <form class="information form hide">
+    
+            <div><label for="type">Type</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<select class="type-input" name="type" id=""><option value="running">Runnging</option>
+            <option value="cycling">Cycling</option></select></div>
+           <div> <label for="distance">Distance</label><input type="text" placeholder="km" id="distance" class="distance-input"><br></div>
+           <div> <label for="duration">Duration</label>&nbsp;<input type="text" placeholder="min" id="duration" class="duration-input"></div>
+           <div class="candece-div"> <label for="candece">Candece</label><input type="text" placeholder="step/min" id="candece" class="candece-input"><br></div>
+           <div class="elev-gain-div"> <label for="elev-gain">Elev Gain</label><input type="text" id="elev-gain" class="elev-gain-input"></div>
+           <button class="btn btn-submit" type="submit">Add</button>
+    
+            </form>
+
+        </div>
+    <div id="map" class="map"></div>
+</main>
+
+    
+</body>
+</html>
