@@ -101,6 +101,12 @@ const addEntriesFromLocalStorage=function(){
         verticalContainer.insertAdjacentHTML("beforeend",entry)
     }
 }
+
+const reset=function(){
+    localStorage.clear()
+    location.reload()
+}
+
 /////////////////////map code///////////////////////////
 
 navigator.geolocation.getCurrentPosition(function(position){
@@ -246,10 +252,6 @@ form.addEventListener("submit",function(e){
             })
         }
 
-
-
-        
-
         let entries=document.querySelectorAll(".entry")
 
         for(let entry of entries){
@@ -258,14 +260,9 @@ form.addEventListener("submit",function(e){
                  goToWorkoutEventListner(e)
              })
         }
-
-
-
         for(let entry of entries){
             setLocalStorage(entry);
         }
-
-
         })
     
     
@@ -273,3 +270,34 @@ form.addEventListener("submit",function(e){
 
 addEntriesFromLocalStorage()
 
+let entries=document?.querySelectorAll(".entry")
+
+        for(let entry of entries){
+
+             entry?.addEventListener("click",function(e){
+                 goToWorkoutEventListner(e)
+             })
+        }
+
+
+        let icons=document?.querySelectorAll(".icon")
+        for(let icon of icons){
+            icon.addEventListener("click",function(e){
+                let box=e?.target?.closest("div")
+
+                if(box.classList.contains("expanded")){
+                    hideExpandedBox(box,icon)
+                    return   
+                }
+                
+                if (box.classList.contains("running-entry")){
+
+                    
+                    unhideExpandedBox(box,icon)
+
+                }
+                if (box.classList.contains("cycling-entry")){
+                    unhideExpandedBox(box,icon)
+                }
+            })
+        }
