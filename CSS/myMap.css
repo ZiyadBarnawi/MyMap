@@ -9,8 +9,6 @@
 html{
     font-size: 62.5%;
 }
-
-
 main{
     display: flex;
     height: 99vh;
@@ -58,7 +56,6 @@ input,select{
     width: 70%;
     height: 100%;
 }
-
 .hide{
     transform: translateY(-100%);
     opacity: 0;
@@ -69,7 +66,6 @@ input,select{
     transform: translateY(0);
     transition: 0.5s;
 }
-
 .expanded{
     height: 13.3rem;
     transition: 0.5s;
@@ -87,28 +83,23 @@ input,select{
     margin-left: 35%;
     /* border: none; */
 }
-
 .running-popup{
 border-left: 0.5rem solid #63e6be;
 border-radius: 1.5rem;
-
 }
 .cycling-popup{
     border-left: 0.5rem solid #f59f00;
     border-radius: 1.5rem;
 }
-
 .elev-gain-div{
     display: none;
 }
-
 .entry{
     font-size: 2rem;
     padding-top: 4rem;
     padding-bottom: 4rem;
     cursor: pointer;
 }
-
 .running-entry{
     border-left: 0.5rem solid #63e6be;
     /* background-color: #495057; */
@@ -122,14 +113,19 @@ border-radius: 1.5rem;
     border-top-right-radius: 1.5rem;
     border-bottom-right-radius: 1.5rem;
 }
-
 .icon{
     width: 2.4rem;
     overflow: visible;
     transition: 0.5s;
 }
-
 .icon-upsideDown{
     transform: rotate(180deg);
     transition: 0.5s;
+}
+.hidden-span{
+    display: none;
+}
+
+.unhidden-span{
+    display: block;
 }

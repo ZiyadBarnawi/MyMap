@@ -1,5 +1,4 @@
 "use strict"
-
 /////////////////////Variables///////////////////////////
 let typeInput=document.querySelector(".type-input")
 let distanceinput=document.querySelector(".distance-input")
@@ -15,6 +14,36 @@ let date =new Date();
 let verticalContainer=document.querySelector(".vertical-container")
 let id=0
 /////////////////////functions///////////////////////////
+
+
+const hideExpandedBox=function(box,icon){
+    console.log("hiddden method",box)
+        box.classList.remove("expanded")
+        box.classList.add("unexpanded")
+        icon.classList.toggle("icon-upsideDown")
+        box.querySelector("span")?.classList.toggle("hidden-span")
+        box.querySelector("span")?.classList.toggle("unhidden-span")
+        // if(box.querySelector("span")===undefined)
+        //     return true
+        //     else
+        //     return false
+}
+
+const unhideExpandedBox=function(box,icon){
+    console.log("unhidden method",box)
+    let hiddenSpan =document.querySelectorAll(".hidden-span")
+    box.classList.add("expanded")
+    box.classList.remove("unexpanded")
+    icon.classList.toggle("icon-upsideDown")
+
+    
+    box.querySelector("span")?.classList.toggle("unhidden-span")
+    box.querySelector("span")?.classList.toggle("hidden-span")
+    // if(hiddenSpan.length===0)
+    // return true
+    // else
+    // return false
+}
 
 const calcPace=function(duration,distance){
     return Math.ceil( duration/distance)
@@ -50,9 +79,19 @@ navigator.geolocation.getCurrentPosition(function(position){
 })
 
 
+// /////////////////////code///////////////////////////
 
-/////////////////////code///////////////////////////
 
+typeInput.addEventListener("change",function(e){
+    if (typeInput.value==="cycling")
+        {
+    elevGainDiv.style.display="block"
+    candeceDiv.style.display="none"}
+    else{
+    elevGainDiv.style.display="none"
+    candeceDiv.style.display="block"
+    }
+})
 
 form.addEventListener("submit",function(e){
     e.preventDefault()
@@ -88,15 +127,9 @@ form.addEventListener("submit",function(e){
         .bindPopup(L.popup([lat,lng],{content: `<p  style="color:black; font-size: 18px;"> running in ${date.getDate()} of ${date.toLocaleString('default', { month: 'long' })}<p/>`,maxWidth:250,minWidth:100,autoClose:false,closeOnClick:false,className:"running-popup"}))
         .openPopup();
         verticalContainer.insertAdjacentHTML("beforeend",`<div data-candece="${candeceInput.value}" data-id="${id}" class="entry running-entry unexpanded">
-                <p>Running at ${calcPace(Number(durationInput.value),Number(distanceinput.value))} m/min for ${durationInput.value}  minutes 🏃‍➡️ <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><polyline points="208 96 128 176 48 96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg> </p>
+                <p>Running at ${calcPace(Number(durationInput.value),Number(distanceinput.value))} m/min for ${durationInput.value}  minutes 🏃‍➡️ <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><polyline points="208 96 128 176 48 96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg> <span class="hidden-span"> Candece: ${candeceInput.value} </span> </p>
             </div>`)
-            id++
-
-
-
-            
-
-                
+            id++      
     }
     else
     {
@@ -104,92 +137,36 @@ form.addEventListener("submit",function(e){
         .bindPopup(L.popup([lat,lng],{content: `<p  style="color:black; font-size: 18px;"> cycling in ${date.getDate()} of ${date.toLocaleString('default', { month: 'long' })}<p/>`,maxWidth:250,minWidth:100,autoClose:false,closeOnClick:false,className:"cycling-popup"}))
         .openPopup();
         verticalContainer.insertAdjacentHTML("beforeend",`<div data-elev-gain="${elevGainInput.value}" data-id="${id}" class="entry cycling-entry unexpanded">
-                <p>Cycling at ${calcSpeed(Number(distanceinput.value),Number(durationInput.value))} for ${durationInput.value} minutes <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><polyline points="208 96 128 176 48 96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg> 🚴</p>
+                <p>Cycling at ${calcSpeed(Number(distanceinput.value),Number(durationInput.value))} m/min for ${durationInput.value} minutes 🚴 <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><polyline points="208 96 128 176 48 96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg> <span class="hidden-span"> Elevation gain: ${elevGainInput.value} </span> </p>
             </div>`)
             id++
     }
-    // L.marker([lat,lng],{riseOnHover:true}).addTo(map)
-    //     .bindPopup(L.popup([lat,lng],{content: '<p style="color:black;">Workout<p/>',maxWidth:250,minWidth:100,autoClose:false,closeOnClick:false,className:"running-popup"}))
-    //     .openPopup();
-
         distanceinput.value=""
         durationInput.value=""
         candeceInput.value=""
         elevGainInput.value=""
         form.classList.toggle("hide")
         form.classList.toggle("unhide")
-
-
-        let icon=document.querySelectorAll(".icon")
-            icon[icon.length-1].addEventListener("click",function(e){
-
-                console.log("in the icon event handeller")
-                let box;
-                box=e.target.closest("div")
-                
-               let icon1=e.target
-
-                if(box.classList.contains("expanded")){
-                    box.classList.remove("expanded")
-                    box.classList.add("unexpanded")
-                    icon1.classList.toggle("icon-upsideDown")
-                    box.querySelector("span").remove()
-                    return   
-                }
-                
-                if (box.classList.contains("running-entry")){
-                    box.insertAdjacentHTML("beforeend",`<span> Candece: ${document.querySelector(`[data-id="${box.dataset.id}"]`).dataset.candece} </span>`)
-                    box.classList.add("expanded")
-                    box.classList.remove("unexpanded")
-                    icon1.classList.toggle("icon-upsideDown")
-                }
-                if (box.classList.contains("cycling-entry")){
-                    box.insertAdjacentHTML("beforeend",`<span> Elevation gain: ${document.querySelector(`[data-id="${box.dataset.id}"]`).dataset.elevGain} </span>`)
-                    box.classList.add("expanded")
-                    box.classList.remove("unexpanded")
-                    icon1.classList.toggle("icon-upsideDown")
-                }
-                isThereAWorkout=true
-            })
-
-})
-
-
-typeInput.addEventListener("change",function(e){
-    if (typeInput.value==="cycling")
-        {
-    elevGainDiv.style.display="block"
-    candeceDiv.style.display="none"}
-    else{
-    elevGainDiv.style.display="none"
-    candeceDiv.style.display="block"
-    }
-})
-
-    verticalContainer.addEventListener("click",function(e){
-    let box=e.target
-    let icon=e.target.querySelector(".icon")
-
-    if(box.classList.contains("expanded")){
-        box.classList.remove("expanded")
-        box.classList.add("unexpanded")
-        icon.classList.toggle("icon-upsideDown")
-        box.querySelector("span").remove()
-        return   
-    }
     
-    if (box.classList.contains("running-entry")){
-        box.insertAdjacentHTML("beforeend",`<span> Candece: ${document.querySelector(`[data-id="${box.dataset.id}"]`).dataset.candece} </span>`)
-        box.classList.add("expanded")
-        box.classList.remove("unexpanded")
-        icon.classList.toggle("icon-upsideDown")
-    }
-    if (box.classList.contains("cycling-entry")){
-        box.insertAdjacentHTML("beforeend",`<span> Elevation gain: ${document.querySelector(`[data-id="${box.dataset.id}"]`).dataset.elevGain} </span>`)
-        box.classList.add("expanded")
-        box.classList.remove("unexpanded")
-        icon.classList.toggle("icon-upsideDown")
-    }
+            let icons=document.querySelectorAll(".icon")
+                for(let icon of icons){
+                    icon.addEventListener("click",function(e){
+                        let box=e.target.closest("div")
+        
+                        if(box.classList.contains("expanded")){
+                            hideExpandedBox(box,icon)
+                            return   
+                        }
+                        
+                        if (box.classList.contains("running-entry")){
+
+                            
+                            unhideExpandedBox(box,icon)
+        
+                        }
+                        if (box.classList.contains("cycling-entry")){
+                            unhideExpandedBox(box,icon)
+                        }
+                    })
+                }
     })
-
-
