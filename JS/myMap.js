@@ -20,7 +20,11 @@ let candeceDiv=document.querySelector(".candece-div")
 let elevGainDiv=document.querySelector(".elev-gain-div")
 let date =new Date();
 let verticalContainer=document.querySelector(".vertical-container")
-let id=getIdFromLocalStorage()
+let id
+if (localStorage.getItem("id")===null)
+     id=0
+else
+     id=getIdFromLocalStorage()
 let clickedEntry;
 let latitude,longitude;
 let mapZoomLvl=13
