@@ -46,7 +46,8 @@ const calcPace = function (duration, distance) {
 };
 
 const calcSpeed = function (distance, duration) {
-  return Math.round(distance / duration);
+  let speed = distance / duration;
+  return speed.toFixed(3);
 };
 
 const goToWorkoutEventListner = function (e) {
@@ -74,10 +75,7 @@ const goToWorkout = function (entry) {
 };
 
 const setLocalStorage = function (entry) {
-  localStorage.setItem(
-    `workout ${entry.dataset.id}`,
-    entry.outerHTML
-  );
+  localStorage.setItem(`workout ${entry.dataset.id}`, entry.outerHTML);
 };
 const getLocalStorage = function () {
   let entries = [];
@@ -137,52 +135,33 @@ navigator.geolocation.getCurrentPosition(
           restoredElement.dataset.candece
         );
 
-        L.marker(
-          [
-            Number(restoredElement.dataset.lat),
-            Number(restoredElement.dataset.lng),
-          ],
-          { riseOnHover: true }
-        )
+        L.marker([Number(restoredElement.dataset.lat), Number(restoredElement.dataset.lng)], {
+          riseOnHover: true,
+        })
           .addTo(map)
           .bindPopup(
-            L.popup(
-              [
-                restoredElement.dataset.lat,
-                restoredElement.dataset.lng,
-              ],
-              {
-                content: `<p  style="color:black; font-size: 18px;"> running in ${restoredElement.dataset.date}<p/>`,
-                maxWidth: 250,
-                minWidth: 100,
-                autoClose: false,
-                closeOnClick: false,
-                className: "running-popup",
-              }
-            )
+            L.popup([restoredElement.dataset.lat, restoredElement.dataset.lng], {
+              content: `<p  style="color:black; font-size: 18px;"> running in ${restoredElement.dataset.date}<p/>`,
+              maxWidth: 250,
+              minWidth: 100,
+              autoClose: false,
+              closeOnClick: false,
+              className: "running-popup",
+            })
           )
           .openPopup();
       } else {
-        L.marker(
-          [restoredElement.dataset.lat, restoredElement.dataset.lng],
-          { riseOnHover: true }
-        )
+        L.marker([restoredElement.dataset.lat, restoredElement.dataset.lng], { riseOnHover: true })
           .addTo(map)
           .bindPopup(
-            L.popup(
-              [
-                restoredElement.dataset.lat,
-                restoredElement.dataset.lng,
-              ],
-              {
-                content: `<p  style="color:black; font-size: 18px;"> cycling in ${restoredElement.dataset.date}<p/>`,
-                maxWidth: 250,
-                minWidth: 100,
-                autoClose: false,
-                closeOnClick: false,
-                className: "cycling-popup",
-              }
-            )
+            L.popup([restoredElement.dataset.lat, restoredElement.dataset.lng], {
+              content: `<p  style="color:black; font-size: 18px;"> cycling in ${restoredElement.dataset.date}<p/>`,
+              maxWidth: 250,
+              minWidth: 100,
+              autoClose: false,
+              closeOnClick: false,
+              className: "cycling-popup",
+            })
           )
           .openPopup();
       }
@@ -208,17 +187,11 @@ form.addEventListener("submit", function (e) {
   e.preventDefault();
   let { lat, lng } = mapEvent.latlng;
 
-  if (
-    Number(durationInput.value) < 0 ||
-    isNaN(Number(durationInput.value))
-  ) {
+  if (Number(durationInput.value) < 0 || isNaN(Number(durationInput.value))) {
     durationInput.focus();
     alert("Inaccuraet duration value");
     return;
-  } else if (
-    Number(distanceinput.value) < 0 ||
-    isNaN(Number(distanceinput.value))
-  ) {
+  } else if (Number(distanceinput.value) < 0 || isNaN(Number(distanceinput.value))) {
     distanceinput.focus();
     alert("Inaccurate distance value");
     return;
@@ -257,12 +230,9 @@ form.addEventListener("submit", function (e) {
       .openPopup();
     verticalContainer.insertAdjacentHTML(
       "beforeend",
-      `<div data-date="${date.getDate()} of ${date.toLocaleString(
-        "default",
-        { month: "long" }
-      )}" data-lat="${mapEvent.latlng.lat}" data-lng="${
-        mapEvent.latlng.lng
-      }" data-candece="${
+      `<div data-date="${date.getDate()} of ${date.toLocaleString("default", {
+        month: "long",
+      })}" data-lat="${mapEvent.latlng.lat}" data-lng="${mapEvent.latlng.lng}" data-candece="${
         candeceInput.value
       }" data-id="${id}" class="entry running-entry unexpanded">
                 <p>Running at ${calcPace(
@@ -294,14 +264,13 @@ form.addEventListener("submit", function (e) {
         })
       )
       .openPopup();
+    console.log(Number(distanceinput.value) / Number(durationInput.value));
+
     verticalContainer.insertAdjacentHTML(
       "beforeend",
-      `<div data-date="${date.getDate()} of ${date.toLocaleString(
-        "default",
-        { month: "long" }
-      )}" data-lat="${mapEvent.latlng.lat}" data-lng="${
-        mapEvent.latlng.lng
-      }" data-elev-gain="${
+      `<div data-date="${date.getDate()} of ${date.toLocaleString("default", {
+        month: "long",
+      })}" data-lat="${mapEvent.latlng.lat}" data-lng="${mapEvent.latlng.lng}" data-elev-gain="${
         elevGainInput.value
       }" data-id="${id}" class="entry cycling-entry unexpanded">
                 <p>Cycling at ${calcSpeed(
